@@ -1,4 +1,5 @@
 import 'package:ecom_getx/Features/Cart/Screen/cart_screen.dart';
+import 'package:ecom_getx/Features/Login/Screens/sign_up_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Cart/Controller/cart_controller.dart';
+import '../../Login/Controller/home_controller.dart';
 import '../Controller/product_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenWidth = mediaQuery.size.width;
     final ProductController productController = Get.put(ProductController());
     final CartController cartController = Get.put(CartController());
+    final AuthController authController = Get.find<AuthController>();
+
     return SafeArea(
         child: Scaffold(
       body: ListView(
@@ -32,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       height: 50,
@@ -57,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                     Obx(
                       () => InkWell(
                         onTap: () {
@@ -76,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                     const Badge(
                       label: Text('9+'),
                       child: Image(
@@ -87,6 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
+                    IconButton(
+                        onPressed: () {
+                          authController.logout(context);
+                        },
+                        icon: Icon(Icons.logout))
                   ],
                 ),
               ),
@@ -242,6 +251,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onPressed: () {
                                           cartController.addToCart(
                                               product, index);
+                                          showSnackBarDialogue(
+                                              context: context,
+                                              message: "Added to Cart");
                                         },
                                         icon: const Icon(CupertinoIcons.cart)),
                                   )
