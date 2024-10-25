@@ -1,3 +1,4 @@
+import 'package:ecom_getx/Features/HomeScreen/Screens/home_screen.dart';
 import 'package:ecom_getx/Features/Login/Screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,25 +118,37 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                           height:
                               screenHeight * 0.05), // Dynamic vertical spacing
-                      Container(
-                        height: screenHeight * 0.07, // Dynamic button height
-                        width: screenWidth * 0.8, // Dynamic button width
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xffB81736),
-                              Color(0xff281537),
-                            ],
+                      GestureDetector(
+                        onTap: () {
+                          // print("object");
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => HomeScreen(),
+                          //     ));
+                          Get.to(() => const HomeScreen());
+                          // Get.to();
+                        },
+                        child: Container(
+                          height: screenHeight * 0.07, // Dynamic button height
+                          width: screenWidth * 0.8, // Dynamic button width
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color(0xffB81736),
+                                Color(0xff281537),
+                              ],
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'SIGN IN',
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white,
+                          child: Center(
+                            child: Text(
+                              'SIGN IN',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
